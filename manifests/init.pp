@@ -129,7 +129,7 @@ class profile_docker (
     # Defaults -> Exceptions -> Exemptions
     $_intermediate_1 = $_default_chains + $_exception_chains
     $_final_chains = $_intermediate_1 + $_exempt_chains
-    notify { "FINAL CHAINS... $_final_chains" : }
+    # notify { "FINAL CHAINS... $_final_chains" : }
 
     # Actually create firewallchains
     $chain_defaults = {
