@@ -2,58 +2,60 @@
 profile_docker::builtin_chains: ~
 
 profile_docker::purge_exempt_chains:
-    filter:
-        chains:
-            - "DOCKER"
-            - "DOCKER-ISOLATION-STAGE-1"
-            - "DOCKER-ISOLATION-STAGE-2"
-            - "DOCKER-USER"
-        protocols:
-            - "IPv4"
-    nat:
-        chains:
-            - "DOCKER"
-            - "DOCKER-ISOLATION-STAGE-1"
-            - "DOCKER-ISOLATION-STAGE-2"
-            - "DOCKER-USER"
-        protocols:
-            - "IPv4"
+  filter:
+    chains:
+      - "DOCKER"
+      - "DOCKER-ISOLATION-STAGE-1"
+      - "DOCKER-ISOLATION-STAGE-2"
+      - "DOCKER-USER"
+    protocols:
+      - "IPv4"
+  nat:
+    chains:
+      - "DOCKER"
+      - "DOCKER-ISOLATION-STAGE-1"
+      - "DOCKER-ISOLATION-STAGE-2"
+      - "DOCKER-USER"
+    protocols:
+      - "IPv4"
 
 profile_docker::purge_exceptions:
   - ignores:
-        - "DOCKER"
-        - "DOCKER-ISOLATION-STAGE-1"
-        - "DOCKER-ISOLATION-STAGE-2"
-        - "DOCKER-USER"
-        - "docker"
+      - "DOCKER"
+      - "DOCKER-ISOLATION-STAGE-1"
+      - "DOCKER-ISOLATION-STAGE-2"
+      - "DOCKER-USER"
+      - "docker"
+      - "-i br-"
+      - "-o br-"
     tables:
-        filter:
-            chains:
-                - "INPUT"
-                - "OUTPUT"
-                - "FORWARD"
-            protocols:
-                - "IPv4"
-        nat:
-            chains:
-                - "INPUT"
-                - "OUTPUT"
-                - "PREROUTING"
-            protocols:
-                - "IPv4"
+      filter:
+        chains:
+          - "INPUT"
+          - "OUTPUT"
+          - "FORWARD"
+        protocols:
+          - "IPv4"
+      nat:
+        chains:
+          - "INPUT"
+          - "OUTPUT"
+          - "PREROUTING"
+        protocols:
+          - "IPv4"
   - ignores:
-        - "DOCKER"
-        - "DOCKER-ISOLATION-STAGE-1"
-        - "DOCKER-ISOLATION-STAGE-2"
-        - "DOCKER-USER"
-        - "docker"
-        - "172.17"
-        - "172.18"
-        - "172.19"
+      - "DOCKER"
+      - "DOCKER-ISOLATION-STAGE-1"
+      - "DOCKER-ISOLATION-STAGE-2"
+      - "DOCKER-USER"
+      - "docker"
+      - "172.17"
+      - "172.18"
+      - "172.19"
     tables:
-        nat:
-            chains:
-                - "PREROUTING"
-            protocols:
-                - "IPv4"
+      nat:
+        chains:
+          - "POSTROUTING"
+        protocols:
+          - "IPv4"
 

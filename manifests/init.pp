@@ -132,20 +132,21 @@ class profile_docker (
     # notify { "FINAL CHAINS... $_final_chains" : }
 
     # Actually create firewallchains
-    $chain_defaults = {
-      purge => true,
-    }
-    create_resources( firewallchain, $_final_chains, $chain_defaults )
-    # $_final_chains.each | $name, $params | {
-    #   firewallchain {
-    #     $name :
-    #       * => $params,
-    #     ;
-    #     default :
-    #         purge => true,
-    #     ;
-    #   }
+    # $chain_defaults = {
+    #   purge => true,
     # }
+    # create_resources( firewallchain, $_final_chains, $chain_defaults )
+    $_final_chains.each | $name, $params | {
+      # notify { "About to declare FWchain: ${name}...${params}" : }
+      firewallchain {
+        $name :
+          * => $params,
+        ;
+        default :
+          purge => true,
+        ;
+      }
+    }
 
     # SAMPLE BUILT-IN CHAINS
 #    $inbuilt_chains = {
